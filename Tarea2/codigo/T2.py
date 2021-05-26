@@ -1,42 +1,48 @@
-# Solo para omitir warnings, en general NO deberían usarlo
+# %%
 import warnings
 warnings.filterwarnings("ignore")
-
 #import pyfits #modulo para leer archivos fits
-from astropy.io import fits
-import matplotlib.pyplot as plt #modulo para graficar
-import numpy as np #este modulo es para trabajar con matrices como en matlab
+from astropy.io import fits  # leer archivos fits
+import matplotlib.pyplot as plt  # graficar
+import numpy as np  # para manejar los datos
 import scipy as sp
 from scipy import ndimage
-import pandas as pd
+import pandas as pd  # tablas y manejo de datos
 from astropy.stats import sigma_clip
+from scipy.optimize import curve_fit  # fitear curvas
+from matplotlib.font_manager import FontProperties  # fuente de los gráficos
+import math
 
-cubo = fits.open("southgal_fixbadc.fits")  #abrir objeto cubo de datos
-data = cubo[0].data  #extraer matriz de datos
-header= cubo[0].header  #extraer el header del archivo fits
+G = 6.67408*10**(-11)  # [m3kg-1s-2]
+cubo = fits.open("southgal_fixbadc.fits")  # se abre el cubo de datos
+data = cubo[0].data  # extracción matriz de datos
+header= cubo[0].header  # extracción del header
 
 
-def values(h,j):  # funcion para obtener los valores de los ejes l, b, v
-    N=h['NAXIS'+str(j)];
-    val=np.zeros(N)
+def values(h,j):
+    """
+    Funcion para obtener los valores de los ejes l, b, v
+    """
+    N = h['NAXIS'+str(j)];
+    val = np.zeros(N)
     for i in range(0,N):
-        val[i] = (i+1-float(h['CRPIX'+str(j)]))*float(h['CDELT'+str(j)]) +\
+        val[i] = (i + 1 - float(h['CRPIX' + str(j)]))*float(h['CDELT' + str(j)]) +\
                   float(h['CRVAL'+str(j)])
     return val
 
 
-# Estos seran los tres arreglos con los valores reales de los tres ejes
+# Estos serán los tres arreglos con los valores reales de los tres ejes
 # del cubo
 velocidad=values(header,1)
 longitud=values(header,2)
 latitud=values(header,3)
-
+# Índices de una longitud y latitud específica
 lon_i = np.where(longitud== 325.0)[0][0]
 lat_i = np.where(latitud== -0.25)[0][0]
 
-i_l=-1
-i_b=-1
-i_k=-1
+i_l = -1
+i_b = -1
+i_k = -1
 
 #print(lon_i,lat_i)
 """
@@ -48,7 +54,8 @@ ax1[0].plot(velocidad, data[lat_i][lon_i][:])
 ax1[0].set_xlabel('Velocidad')
 ax1[0].set_ylabel('Temperatura', fontsize=18)
 
-T = data[i_b][i_l][:] #i_b = 14 i_l =200
+#T = data[i_b][i_l][:] #i_b = 14 i_l =200
+T = data[14][200][:]
 ruido = np.where(T<0.5 ) #unidades de K  # otra forma es T>0.5  
 ax1[1].plot(velocidad, T, '.',color='r', label='Signal')
 ax1[1].plot(velocidad[ruido], T[ruido],'.', color='b', label='Noise')
@@ -57,7 +64,7 @@ ax1[1].set_xlabel('Velocidad', fontsize=18)
 ax1[1].set_ylabel('Temperatura', fontsize=18)
 ax1[1].set_title('Separando a mano', fontsize=18)
 
-T = data[i_b][i_l][:]
+#T = data[i_b][i_l][:]
 ruido = np.where(T<0.5 ) #otra forma es T>0.5
 ax1[2].plot(velocidad, T,color='r', label='Signal')
 ax1[2].plot(velocidad[ruido], T[ruido], color='b', label='Noise')
@@ -83,7 +90,7 @@ print ('v_tan con mascara =', v_tan)
 # velocidad que es 5 veces mayor que el rms, esta ultima se guarda un arreglo
 
 
-def fmin(l,latitud,vs):
+def fmin(l, latitud, vs):
     #recorre latitud
     for q in range(33):
         T1 = data[q][l][:]
@@ -98,8 +105,8 @@ def fmin(l,latitud,vs):
 vmin = np.zeros(385)
 bvmin = np.zeros(385)
 R = np.zeros(385)
-R0 = 8.5 # kPc
-vsol = 220
+R0 = 8.5  # kPc
+vsol = 220  # km/s
 
 # maximorum
 # Se recorren las longitudes y se busca la velocidad más negativa (mayor en modulo), se guarda esta
@@ -130,14 +137,130 @@ for i in range(385):
     vR[i] = vmin[i]*(np.abs(sp.sin(longitud[i]*sp.pi/180.))/\
                      sp.sin(longitud[i]*sp.pi/180.)) +\
                      np.abs(vsol*sp.sin(longitud[i]*sp.pi/180.))
-
+# %%
+"""
+======================P1======================
+"""
 #curva de rotacion
-fig2, ax2 = plt.subplots(figsize=(3.5, 2.5))
+fig2, ax2 = plt.subplots(figsize=(5.5, 2.5))
 ax2.plot(R,vR, 'maroon')
 ax2.plot(R,vR, 'r.')
+ax2.set_ylim(50, 255)
+ax2.set_yticks(np.arange(60, 255, 40))
 ax2.grid()
-ax2.set_xlabel("R", fontsize=10)
-ax2.set_ylabel("Vtan", fontsize=10)
-ax2.set_title("Velocidad de rotacion en funcion de R", fontsize=10)
+ax2.set_xlabel("$R$ [kpc]", fontsize=10)
+ax2.set_ylabel("$V_{tan}$ [km/s]", fontsize=10)
+#ax2.set_title("Velocidad de rotacion en funcion de R", fontsize=10)
 fig2.tight_layout()    
-fig2.savefig("primera_curva_rotacion")
+fig2.savefig("img/curva_rotacion.pdf")
+# %%
+"""
+======================P2======================
+"""
+def altura_z(l, b_max):
+    return R0*np.cos(l*sp.pi/180.)*np.tan(b_max*sp.pi/180.)
+
+l_list = np.arange(0, 385)
+fig4, ax4 = plt.subplots(figsize=(5.5, 2.5))
+ax4.scatter(R, altura_z(l_list, bvmin), color='blue', marker='.')
+ax4.set_xlabel('R [kpc]')
+ax4.set_ylabel('z [kpc]')
+ax4.grid()
+fig4.show()
+fig4.tight_layout()
+fig4.savefig("img/corrugacion.pdf")
+
+
+# %%
+"""
+======================P3======================
+"""
+# Funciones de la velocidad tangencial para cada modelo
+def distribucion_masa_1(r, M_0):
+    return np.sqrt(G*M_0/r)
+
+
+def distribucion_masa_2(r, S):
+    return np.sqrt(G*(np.pi*r**2*S)/r)
+
+
+def distribucion_masa_3(r, rho):
+    return np.sqrt(G*(4/3*np.pi*r**3*rho)/r)
+
+
+def distribucion_masa_4(r, S, M_0):
+    return np.sqrt(G*(np.pi*r**2*S + M_0)/r)
+
+
+def distribucion_masa_5(r, rho, M_0):
+    return np.sqrt(G*(4/3*np.pi*r**3*rho + M_0)/r)
+
+
+popt_1, pcov_1 = curve_fit(distribucion_masa_1, R, vR)
+popt_2, pcov_2 = curve_fit(distribucion_masa_2, R, vR)
+popt_3, pcov_3 = curve_fit(distribucion_masa_3, R, vR)
+popt_4, pcov_4 = curve_fit(distribucion_masa_4, R, vR)
+popt_5, pcov_5 = curve_fit(distribucion_masa_5, R, vR)
+
+font = FontProperties()
+font.set_family('serif')  # fuente para los plots
+
+fig3, ax3 = plt.subplots(5, 1, figsize=(5.2, 9), sharex=True)
+fig3.subplots_adjust(hspace=0)
+ax3[0].plot(R, distribucion_masa_1(R, *popt_1))
+ax3[0].plot(R, vR, 'maroon')
+ax3[0].plot(R, vR, 'r.')
+ax3[0].set_ylim(50, 255)
+ax3[0].set_yticks(np.arange(60, 255, 40))
+ax3[0].grid()
+ax3[0].text(0.8, 0.15, 'Masa central', fontsize=11,
+         fontproperties=font, horizontalalignment='center',
+         verticalalignment='center', transform=ax3[0].transAxes,
+         bbox=dict(facecolor='white', alpha=1))
+ax3[1].plot(R, distribucion_masa_2(R, *popt_2))
+ax3[1].plot(R, vR, 'maroon')
+ax3[1].plot(R, vR, 'r.')
+ax3[1].set_ylim(50, 255)
+ax3[1].set_yticks(np.arange(60, 255, 40))
+ax3[1].grid()
+ax3[1].text(0.8, 0.15, 'Disco uniforme', fontsize=11,
+         fontproperties=font, horizontalalignment='center',
+         verticalalignment='center', transform=ax3[1].transAxes,
+         bbox=dict(facecolor='white', alpha=1))
+ax3[2].plot(R, distribucion_masa_3(R, *popt_3))
+ax3[2].plot(R, vR, 'maroon')
+ax3[2].plot(R, vR, 'r.')
+ax3[2].set_ylim(50, 255)
+ax3[2].set_yticks(np.arange(60, 255, 40))
+ax3[2].grid()
+ax3[2].set_ylabel('$V_{tan}$ [km/s]')
+ax3[2].text(0.8, 0.15, 'Esfera uniforme', fontsize=11,
+         fontproperties=font, horizontalalignment='center',
+         verticalalignment='center', transform=ax3[2].transAxes,
+         bbox=dict(facecolor='white', alpha=1))
+ax3[3].plot(R, distribucion_masa_4(R, *popt_4))
+ax3[3].plot(R, vR, 'maroon')
+ax3[3].plot(R, vR, 'r.')
+ax3[3].set_ylim(50, 255)
+ax3[3].set_yticks(np.arange(60, 255, 40))
+ax3[3].grid()
+ax3[3].text(0.76, 0.15, 'Disco + masa central', fontsize=11,
+         fontproperties=font, horizontalalignment='center',
+         verticalalignment='center', transform=ax3[3].transAxes,
+         bbox=dict(facecolor='white', alpha=1))
+ax3[4].plot(R, distribucion_masa_5(R, *popt_5))
+ax3[4].plot(R, vR, 'maroon')
+ax3[4].plot(R, vR, 'r.')
+ax3[4].set_ylim(50, 255)
+ax3[4].set_yticks(np.arange(60, 255, 40))
+ax3[4].grid()
+ax3[4].set_xlabel('$R$ [kpc]')
+ax3[4].text(0.76, 0.15, 'Esfera + masa central', fontsize=11,
+         fontproperties=font, horizontalalignment='center',
+         verticalalignment='center', transform=ax3[4].transAxes,
+         bbox=dict(facecolor='white', alpha=1))
+
+fig3.show()
+#fig3.tight_layout()
+fig3.savefig("img/fiteo_rotacion.pdf")
+# %%

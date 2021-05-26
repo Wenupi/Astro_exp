@@ -1,0 +1,189 @@
+% Template:     Informe LaTeX
+% Documento:    Archivo principal
+% Versión:      7.0.3 (02/08/2020)
+% Codificación: UTF-8
+%
+% Autor: Pablo Pizarro R.
+%        Facultad de Ciencias Físicas y Matemáticas
+%        Universidad de Chile
+%        pablo@ppizarror.com
+%
+% Manual template: [https://latex.ppizarror.com/informe]
+% Licencia MIT:    [https://opensource.org/licenses/MIT]
+
+% CREACIÓN DEL DOCUMENTO
+\documentclass[letterpaper,oneside]{article}
+
+% INFORMACIÓN DEL DOCUMENTO
+\def\titulodelinforme {Cinemática Galáctica}
+\def\temaatratar {Informe Tarea 2}
+
+\def\autordeldocumento {Javier Huenupi}
+\def\nombredelcurso {Astronomía experimental}
+\def\codigodelcurso {AS3201-1 }
+
+\def\nombreuniversidad {Universidad de Chile}
+\def\nombrefacultad {Facultad de Ciencias Físicas y Matemáticas}
+\def\departamentouniversidad {Departamento de Astronomía}
+\def\imagendepartamento {departamentos/das}
+\def\imagendepartamentoescala {0.2}
+\def\localizacionuniversidad {Santiago, Chile}
+
+% INTEGRANTES, PROFESORES Y FECHAS
+\def\tablaintegrantes {
+\begin{tabular}{ll}
+	Integrantes:
+	& \begin{tabular}[t]{l}
+		Javier Huenupi
+	\end{tabular} \\
+	Profesor:
+	& \begin{tabular}[t]{l}
+		Edgardo Costa\\
+		Leonardo Bronfman
+	\end{tabular} \\
+	Auxiliar:
+	& \begin{tabular}[t]{l}
+		Paulina Palma
+	\end{tabular} \\
+
+	\multicolumn{2}{l}{Fecha de realización: \today} \\
+	\multicolumn{2}{l}{Fecha de entrega: \today} \\
+	\multicolumn{2}{l}{\localizacionuniversidad}
+\end{tabular}}{
+}
+
+% IMPORTACIÓN DEL TEMPLATE
+\input{template}
+
+% INICIO DE PÁGINAS
+\begin{document}
+	
+% PORTADA
+\templatePortrait
+
+% CONFIGURACIÓN DE PÁGINA Y ENCABEZADOS
+\templatePagecfg
+
+% RESUMEN O ABSTRACT
+%\begin{resumen}
+%	\lipsum[1] % Párrafo ejemplo, se puede borrar
+%\end{resumen}
+
+% TABLA DE CONTENIDOS - ÍNDICE
+\templateIndex
+
+% CONFIGURACIONES FINALES
+\templateFinalcfg
+
+% ======================= INICIO DEL DOCUMENTO =======================
+
+%\input{example} % Ejemplo, se puede borrar
+\section{Introducción}
+Se estudia el cuarto cuadrante
+
+\section{Curva de rotación}
+La velocidad depende de la distancia al centro
+Constantes para el Sol de la IAU (no están actualizadas)
+\begin{gather*}
+{v_{\odot}}^{rot}=220 \ km/s\\
+R_{\odot} = 8.5 \ kpc
+\end{gather*}
+En \href{https://www.youtube.com/watch?v=Ijj2VhVSFsg}{la clase} se llega a la \textit{ecuación maestra}, pero para el caso en el que el objeto es tangencial. También se demuestra que $\omega$ disminuye con el radio.
+
+Parece que se ocupa efecto Doppler para medir las velocidades.
+
+No es lo mismo el movimiento en el centro galáctico que en el disco, en el disco se asume rotación pura, mientras que en el centro hay varios fenómenos como expansion, colapso, movimiento energetico, explosiones, etc.
+
+Las velocidades iguales a 0 (en el diagrama longitud-velocidad) es cuando las estrellas están en el círculo solar, por lo que se puede confundir con algo muy lejos.
+
+Parece que las coordenadas están en:
+\begin{gather*}
+300 ^{\circ}<l<348^{\circ}\\
+-2^{\circ}<b<2^{\circ}
+\end{gather*}
+
+Siguiendo la Figura (...) se tiene que la velocidad de una estrella, en la línea de visión viene dada por:
+\begin{equation*}
+v_{\shortparallel}(R)=v(R)cos(\alpha)-v(R_{\odot}sin(l))
+\end{equation*}
+donde, por teorema del seno se tiene,
+\begin{gather*}
+v_{\shortparallel}(R)=v(R)\frac{R_{\odot}}{R}sin(l)-v(R_{\odot}sin(l))\\
+\Leftrightarrow v_{\shortparallel}(R)=[\omega(R)-\omega(R_{\odot})]R_{\odot}sin(l)
+\end{gather*}
+esta última ecuación se le conoce como \textit{la ecuación maestra}.
+
+Para los datos se tiene un cubo de datos con longitud, latitud y velocidad, donde para cada punto en el cielo (l, b) se mide la velocidad máxima que corresponde a la velocidad tangencial visto desde la Tierra. Esta velocidad se escoge como la primera velocidad que tenga una temperatura de antena $T_A>5\sigma$ (la velocidad más grande en magnitud que corresponde a la señal y no ruido), midiendo desde las velocidades en magnitud más grandes a las más pequeñas, con $\sigma =0.1$ \si{\kelvin}. El procedimiento consistió en fijar las longitudes, $l$, y medir la velocidad que cumpla con la condición para la temperatura, que se guarda al igual que la latitud, $b$, correspondiente a la velocidad, además, se calcula el radio tangencial denotado por $R_T$ usando la ecuación (...)($R_{\odot}cosl(l)$). Con estos valores se calcula la velocidad angular tangente $\omega_T$ despejando de la ecuación maestra evaluada en $R_T=R_{\odot}sinl(l)$,
+\begin{equation*}
+\omega(R_{\odot}sin(l))=\frac{v_T(l)}{R_{\odot}sin(l)}+\omega_{\odot}
+\end{equation*}
+Esta velocidad angular se calcula para cada velocidad tangencial de cada longitud, con lo que se consigue el gráfico de $\omega(R)$ vs $R$ de la Figura (...). También se grafica la velocidad tangencial versus el radio, presente en la Figura (...).
+
+Después \href{https://www.youtube.com/watch?v=8ISCwe7OM-8}{el profe }habla sobre la \textit{distancia cinemática}
+\section{Corrugación del plano}
+El disco galactico no es plano, sino que tiene una pequeña corrugacion (60-75 parsec) que es mucho menor que el diametro de la galaxia (100 parsec por ejemplo), por lo que la corrugación equivale $\sim 1\%$.
+
+La galaxia tiene una estructura onfulkatoria que depende de theta y R y que funciona como una onda espiral de densidad, también en R hay modos normales de oscilacion. Se puede asimilar al parche de un tambor ya que se puede expresar analiticamente como una composicion de funciones de Bessel (nosotros lo hacemos más simple utilizando los datos) (agregar más de esto).
+
+Se toma como posición de la densidad máxima para cada longitud, como la posición en la latitud para la cual se consigue la velocidad máxima asociada, $v_{TAN}$, que se llamará $b_{max}$. En ese punto $(l,b_{max})$ se tiene:
+\begin{gather*}
+R=R_{\odot}sin(l) \ \land \ D=R_{\odot}cos(l),
+\end{gather*}
+por lo que, siguiendo la representación de la Figura (...), se consigue que la altura de dicho punto viene dada por:
+\begin{equation*}
+z=D\cdot tan(b_{max})=R_{\odot}cos(l)\cdot tan(b_{max}),
+\end{equation*}
+con lo que se puede calcular la altura de las posiciones para cada longitud y graficar la relación con la distancia $R=R_{\odot}sin(l)$, presente en la Figura (...)
+\section{Ajuste de modelo de masa}
+Se puede encontrar una expresión analítica para la curva de rotación, ocupando un modelo físico correspondiente a la distribución de masa. Para esto se analiza la mecánica de una partícula de masa $m$ a una distancia $R$ del centro galáctico, para la cual se tiene que la fuerza gravitacional se iguala a la fuerza centrifuga, osea,
+\begin{gather*}
+m\frac{v^2(R)}{R}=G\frac{M(R)m}{R^2} \Rightarrow v(R)=\sqrt{G\frac{M(R)}{R}},
+\end{gather*}
+donde $v(R)$ es la velocidad de la partícula, $G$ la constante de gravitación de Newton y $M(R)$ la masa de la galaxia encerrada dentro del radio $R$.
+
+Para este informe se estudiaron 5 modelos de la distribución de masa $M(R)$:
+\begin{itemize}
+\item Modelos de un único parámetro libre
+\begin{itemize}
+\item Masa puntual en el centro galáctico: $M(R)=M_0$.
+\item Disco uniforme: $M(R)=\pi R^2S$, con $S$ la densidad superficial homogénea del disco.
+\item Esfera uniforme: $M(R)=\frac{4}{3}\pi R^3 \rho$, con $\rho$ la densidad volumétrica homogénea de la esfera.
+\end{itemize}
+\item Modelos de dos parámetros libres
+\begin{itemize}
+\item Disco uniforme más una masa puntual central: $M(R)=\pi R^2S+M_0$.
+\item Esfera uniforme más una masa puntual central: $M(R)=\frac{4}{3}\pi R^3 \rho+M_0$
+\end{itemize}
+\end{itemize}
+
+La distribuciones de masa de los distintos modelos se reemplazaron en la ecuación (...) y se definieron las funciones \texttt{distribucion\_masa} con lo que se realizó un fiteo usando como referencia la curva de rotación obtenida de forma empírica, los fiteos de cada modelo, junto a los valores de los parámetros libres se presentan en las Figuras x5(....).
+\section{Análisis y Conclusiones}
+
+\section{Anexos}
+El script utilizado para esta tarea se encuentra en \href{https://github.com/Wenupi/Astro_exp}{este repositorio de GitHub}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/curva_rotacion.pdf}
+    \caption{Curva de rotación}
+    \label{fig:curva-rotacion}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/corrugacion.pdf}
+    \caption{Curva de rotación}
+    \label{fig:corrugacion}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/fiteo_rotacion.pdf}
+    \caption{Curva de rotación}
+    \label{fig:fit-curva-rotacion}
+\end{figure}
+
+
+
+% FIN DEL DOCUMENTO
+\end{document}
