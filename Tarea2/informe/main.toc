@@ -2,6 +2,6 @@
 \contentsline {section}{\numberline {1}Introducción}{1}{section.1}%
 \contentsline {section}{\numberline {2}Curva de rotación}{1}{section.2}%
 \contentsline {section}{\numberline {3}Corrugación del plano}{2}{section.3}%
-\contentsline {section}{\numberline {4}Ajuste de modelo de masa}{2}{section.4}%
+\contentsline {section}{\numberline {4}Ajuste de modelo de masa}{3}{section.4}%
 \contentsline {section}{\numberline {5}Análisis y Conclusiones}{3}{section.5}%
 \contentsline {section}{\numberline {6}Anexos}{3}{section.6}%

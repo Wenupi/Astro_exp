@@ -82,7 +82,9 @@
 Se estudia el cuarto cuadrante
 
 \section{Curva de rotación}
+% https://en.wikipedia.org/wiki/Galaxy_rotation_curve#:~:text=The%20rotation%20curve%20of%20a,distance%20from%20that%20galaxy's%20centre.&text=Stars%20revolve%20around%20their%20galaxy's,a%20large%20range%20of%20distances.
 La velocidad depende de la distancia al centro
+
 Constantes para el Sol de la IAU (no están actualizadas)
 \begin{gather*}
 {v_{\odot}}^{rot}=220 \ km/s\\
@@ -102,44 +104,70 @@ Parece que las coordenadas están en:
 -2^{\circ}<b<2^{\circ}
 \end{gather*}
 
+%======================================================
+
+%Para medir la velocidad de las estrellas en la galaxia se ocupa como trazador del hidrógeno molecular, H\textsubscript{2}, al monóxido de carbono, CO, ya que es la segunda molécula más abundante, tiene un fuerte momento dipolar y sus transiciones son \textit{ubicuas}.
+
 Siguiendo la Figura (...) se tiene que la velocidad de una estrella, en la línea de visión viene dada por:
 \begin{equation*}
 v_{\shortparallel}(R)=v(R)cos(\alpha)-v(R_{\odot}sin(l))
 \end{equation*}
-donde, por teorema del seno se tiene,
-\begin{gather*}
+donde se tiene la distancia del Sol al centro de la galaxia $R_{\odot}=8.5$ kpc, además por teorema del seno se tiene,
+\begin{equation*}
 v_{\shortparallel}(R)=v(R)\frac{R_{\odot}}{R}sin(l)-v(R_{\odot}sin(l))\\
-\Leftrightarrow v_{\shortparallel}(R)=[\omega(R)-\omega(R_{\odot})]R_{\odot}sin(l)
-\end{gather*}
+\end{equation*}
+\[
+\Leftrightarrow v_{\shortparallel}(R)=[\omega(R)-\omega(R_{\odot})]R_{\odot}sin(l) \tag{2.1} \label{eq:ec-maestra}
+\]
 esta última ecuación se le conoce como \textit{la ecuación maestra}.
 
-Para los datos se tiene un cubo de datos con longitud, latitud y velocidad, donde para cada punto en el cielo (l, b) se mide la velocidad máxima que corresponde a la velocidad tangencial visto desde la Tierra. Esta velocidad se escoge como la primera velocidad que tenga una temperatura de antena $T_A>5\sigma$ (la velocidad más grande en magnitud que corresponde a la señal y no ruido), midiendo desde las velocidades en magnitud más grandes a las más pequeñas, con $\sigma =0.1$ \si{\kelvin}. El procedimiento consistió en fijar las longitudes, $l$, y medir la velocidad que cumpla con la condición para la temperatura, que se guarda al igual que la latitud, $b$, correspondiente a la velocidad, además, se calcula el radio tangencial denotado por $R_T$ usando la ecuación (...)($R_{\odot}cosl(l)$). Con estos valores se calcula la velocidad angular tangente $\omega_T$ despejando de la ecuación maestra evaluada en $R_T=R_{\odot}sinl(l)$,
+Haciendo un análisis de la velocidad de una partícula de masa $m$ a una distancia $R$ del centro galáctico, se iguala la fuerza gravitacional con la fuerza centrifuga, con lo que se tiene:
+\[
+m\frac{v^2(R)}{R}=G\frac{M(R)m}{R^2}
+\]
+\[
+ \Rightarrow v(R)=\sqrt{G\frac{M(R)}{R}} \tag{2.2} \label{eq:velocidad}
+\]
+\[
+ \Rightarrow \omega(R)=\frac{v(R)}{R}=\sqrt{G\frac{M(R)}{R^3}}.  \tag{2.3} \label{eq:omega}
+\]
+donde $v(R)$ es la velocidad de la partícula, $\omega(R)$ la velocidad angular, $G$ la constante de gravitación de Newton y $M(R)$ la masa de la galaxia encerrada dentro del radio $R$.
+
+%\begin{gather*}
+%m\frac{v^2(R)}{R}=G\frac{M(R)m}{R^2}\\
+ %\Rightarrow v(R)=\sqrt{G\frac{M(R)}{R}}\\ \tag{2.2} \label{eq:velocidad}
+  %\Rightarrow \omega(R)=\frac{v(R)}{R}=\sqrt{G\frac{M(R)}{R^3}}.  \tag{2.3} \label{eq:omega}
+%\end{gather*}
+Así que, si se tiene que la galaxia tiene una forma esférica $M(R) \propto R^3\Rightarrow\omega(R)$ es constante, pero si tiene forma de disco $M(R) \propto R^2\Rightarrow\omega(R)\propto \sqrt{1/R}$, por lo que $\omega$ es constante o disminuye con la distancia al centro. Con esto se puede calcular la velocidad máxima de $v_{\shortparallel}$. El máximo valor de  $\omega(R)$, que maximiza $v_{\shortparallel}$, se da para la menor distancia al centro galáctico que corresponde a $R_{min}=R_{\odot}sin(l)$, por lo que la velocidad máxima corresponde a la velocidad tangencial.
+
+
+Para realizar esta tarea se ocupó un cubo de datos que contiene: Longitud, latitud y velocidad, donde para cada punto en el cielo $(l,b)$ se midió la velocidad máxima, o sea, la velocidad tangencial del cuerpo observado. Esta velocidad se escoge como la primera velocidad que tenga una temperatura de antena $T_A>5\sigma$ (la velocidad más grande en magnitud que corresponde a la señal y no ruido), midiendo desde las velocidades en magnitud más grandes a las más pequeñas, con $\sigma =0.1$ \si{\kelvin}. El procedimiento consistió en fijar las longitudes, $l$, y medir la velocidad que cumpla con la condición para la temperatura, que se guarda al igual que la latitud, $b$, correspondiente a la velocidad, además, se calcula el radio tangencial denotado por $R_T$ por geometría igual a $R_{\odot}sin(l)$. Con estos valores se calcula la velocidad angular $\omega(R)$ despejando de la ecuación maestra \ref{eq:ec-maestra} evaluada en $R_T$,
 \begin{equation*}
-\omega(R_{\odot}sin(l))=\frac{v_T(l)}{R_{\odot}sin(l)}+\omega_{\odot}
+\omega(R_{\odot}sin(l))=\frac{v_T(l)}{R_{\odot}sin(l)}+\omega_{\odot},
 \end{equation*}
-Esta velocidad angular se calcula para cada velocidad tangencial de cada longitud, con lo que se consigue el gráfico de $\omega(R)$ vs $R$ de la Figura (...). También se grafica la velocidad tangencial versus el radio, presente en la Figura (...).
+con $\omega_{\odot}$ la velocidad angular del Sol igual a (...) rads\textsuperscript{-1}. Esta velocidad angular se calcula para cada velocidad tangencial de cada longitud, con lo que se consigue el gráfico de $\omega(R)$ vs $R$, junto con el gráfico de la velocidad tangencial versus el radio, $v_T(R)$ vs $R$, ambos presentes en la Figura \ref{fig:curva-rotacion}.
 
-Después \href{https://www.youtube.com/watch?v=8ISCwe7OM-8}{el profe }habla sobre la \textit{distancia cinemática}
+Después \href{https://www.youtube.com/watch?v=8ISCwe7OM-8}{el profe }habla sobre la \textit{distancia cinemática}.
+
 \section{Corrugación del plano}
-El disco galactico no es plano, sino que tiene una pequeña corrugacion (60-75 parsec) que es mucho menor que el diametro de la galaxia (100 parsec por ejemplo), por lo que la corrugación equivale $\sim 1\%$.
+El disco galáctico no es completamente plano, sino que tiene una pequeña corrugación que es mucho menor que el diámetro de la galaxia, aproximadamente la corrugación equivale a  $\sim 1\%$ del diámetro.
 
-La galaxia tiene una estructura onfulkatoria que depende de theta y R y que funciona como una onda espiral de densidad, también en R hay modos normales de oscilacion. Se puede asimilar al parche de un tambor ya que se puede expresar analiticamente como una composicion de funciones de Bessel (nosotros lo hacemos más simple utilizando los datos) (agregar más de esto).
+Esto se debe a que la galaxia tiene una estructura ondulatoria que depende del ángulo $\theta$ medido en el plano galáctico, y la distancia $R$ a su centro. Funciona como una onda espiral de densidad, y en $R$ hay modos normales de oscilación. %Se puede asimilar al parche de un tambor ya que se puede expresar analiticamente como una composicion de funciones de Bessel (nosotros lo hacemos más simple utilizando los datos) (agregar más de esto).
 
-Se toma como posición de la densidad máxima para cada longitud, como la posición en la latitud para la cual se consigue la velocidad máxima asociada, $v_{TAN}$, que se llamará $b_{max}$. En ese punto $(l,b_{max})$ se tiene:
+Para medir esta corrugación se utilizaron los mismo datos usados para medir la curva de rotación. Se toma como posición de la densidad máxima para cada longitud, como la posición en la latitud para la cual se consigue la velocidad máxima en magnitud asociada, $v_{T}$, que se llamará $b_{min}$ (se define como $min$ debido a que como se midió en el cuarto cuadrante, la velocidad máxima en magnitud equivale a la velocidad más negativa). En ese punto $(l,b_{min})$ se tiene:
 \begin{gather*}
 R=R_{\odot}sin(l) \ \land \ D=R_{\odot}cos(l),
 \end{gather*}
 por lo que, siguiendo la representación de la Figura (...), se consigue que la altura de dicho punto viene dada por:
 \begin{equation*}
-z=D\cdot tan(b_{max})=R_{\odot}cos(l)\cdot tan(b_{max}),
+z=D\cdot tan(b_{min})=R_{\odot}cos(l)\cdot tan(b_{min}),
 \end{equation*}
-con lo que se puede calcular la altura de las posiciones para cada longitud y graficar la relación con la distancia $R=R_{\odot}sin(l)$, presente en la Figura (...)
+con lo que se puede calcular la altura de las posiciones para cada longitud y graficar la relación con la distancia $R=R_{\odot}sin(l)$, presente en la Figura \ref{fig:corrugacion}.
 \section{Ajuste de modelo de masa}
-Se puede encontrar una expresión analítica para la curva de rotación, ocupando un modelo físico correspondiente a la distribución de masa. Para esto se analiza la mecánica de una partícula de masa $m$ a una distancia $R$ del centro galáctico, para la cual se tiene que la fuerza gravitacional se iguala a la fuerza centrifuga, osea,
+Para encontrar una expresión analítica para la curva de rotación se debe ocupar un modelo físico definido por la distribución de la masa de la galaxia. Para esto se ocupa la ecuación (\ref{eq:velocidad}),
 \begin{gather*}
-m\frac{v^2(R)}{R}=G\frac{M(R)m}{R^2} \Rightarrow v(R)=\sqrt{G\frac{M(R)}{R}},
+v(R)=\sqrt{G\frac{M(R)}{R}},
 \end{gather*}
-donde $v(R)$ es la velocidad de la partícula, $G$ la constante de gravitación de Newton y $M(R)$ la masa de la galaxia encerrada dentro del radio $R$.
 
 Para este informe se estudiaron 5 modelos de la distribución de masa $M(R)$:
 \begin{itemize}
@@ -156,7 +184,7 @@ Para este informe se estudiaron 5 modelos de la distribución de masa $M(R)$:
 \end{itemize}
 \end{itemize}
 
-La distribuciones de masa de los distintos modelos se reemplazaron en la ecuación (...) y se definieron las funciones \texttt{distribucion\_masa} con lo que se realizó un fiteo usando como referencia la curva de rotación obtenida de forma empírica, los fiteos de cada modelo, junto a los valores de los parámetros libres se presentan en las Figuras x5(....).
+La distribuciones de masa de los distintos modelos se reemplazaron en la ecuación (...) y se definieron las funciones \texttt{distribucion\_masa} con lo que se realizó un fiteo usando como referencia la curva de rotación obtenida de forma empírica, los fiteos de cada modelo, junto a los valores de los parámetros libres se presentan en los plots de la Figura \ref{fig:fit-curva-rotacion}.
 \section{Análisis y Conclusiones}
 
 \section{Anexos}
@@ -165,21 +193,21 @@ El script utilizado para esta tarea se encuentra en \href{https://github.com/Wen
 \begin{figure}[H]
     \centering
     \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/curva_rotacion.pdf}
-    \caption{Curva de rotación}
+    \caption{Curvas de rotación para la velocidad tangencial en el gráfico de más arriba y para la velocidad angular en el gráfico de abajo.}
     \label{fig:curva-rotacion}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/corrugacion.pdf}
-    \caption{Curva de rotación}
+    \caption{Corrugación de la vía láctea para el cuarto cuadrante, representado como la altura con respecto al ecuador galáctico versus la distancia al centro galáctico.}
     \label{fig:corrugacion}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/fiteo_rotacion.pdf}
-    \caption{Curva de rotación}
+    \caption{Fiteos de la curva de rotación de la velocidad tangencial para el cuarto cuadrante de la vía láctea, utilizando los 5 modelos descritos en la sección 4.}
     \label{fig:fit-curva-rotacion}
 \end{figure}
 
