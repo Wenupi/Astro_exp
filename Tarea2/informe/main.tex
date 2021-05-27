@@ -154,18 +154,18 @@ Para realizar esta tarea se ocupó un cubo de datos que contiene: Longitud, lati
 \end{equation*}
 con $\omega_{\odot}$ la velocidad angular del Sol igual a 25.882 rads\textsuperscript{-1}. Esta velocidad angular se calcula para cada velocidad tangencial de cada longitud, con lo que se consigue el gráfico de $\omega(R)$ vs $R$, junto con el gráfico de la velocidad tangencial versus el radio, $v_T(R)$ vs $R$, ambos presentes en la Figura \ref{fig:curva-rotacion}.
 
-Después \href{https://www.youtube.com/watch?v=8ISCwe7OM-8}{el profe }habla sobre la \textit{distancia cinemática}.
+%Después \href{https://www.youtube.com/watch?v=8ISCwe7OM-8}{el profe }habla sobre la \textit{distancia cinemática}.
 
 \section{Corrugación del plano}
-El disco galáctico no es completamente plano, sino que tiene una pequeña corrugación que es mucho menor que el diámetro de la galaxia, aproximadamente la corrugación equivale a  $\sim 1\%$ del diámetro.
+El disco galáctico no es completamente plano, sino que tiene una pequeña corrugación que es mucho menor que el diámetro de la galaxia, que equivale aproximadamente a  $\sim 1\%$ del diámetro (\textbf{REVISAR ESTO}).
 
 Esto se debe a que la galaxia tiene una estructura ondulatoria que depende del ángulo $\theta$ medido en el plano galáctico, y la distancia $R$ a su centro. Funciona como una onda espiral de densidad, y en $R$ hay modos normales de oscilación. %Se puede asimilar al parche de un tambor ya que se puede expresar analiticamente como una composicion de funciones de Bessel (nosotros lo hacemos más simple utilizando los datos) (agregar más de esto).
 
-Para medir esta corrugación se utilizaron los mismo datos usados para medir la curva de rotación. Se toma como posición de la densidad máxima para cada longitud, como la posición en la latitud para la cual se consigue la velocidad máxima en magnitud asociada, $v_{T}$, que se llamará $b_{min}$ (se define como $min$ debido a que como se midió en el cuarto cuadrante, la velocidad máxima en magnitud equivale a la velocidad más negativa). En ese punto $(l,b_{min})$ se tiene:
+Para medir esta corrugación se utilizaron los mismo datos usados para medir la curva de rotación. Se toma la posición de la densidad máxima para cada longitud, como la posición en la latitud para la cual se consigue la velocidad máxima en magnitud asociada, $v_{T}$, que se llamará $b_{min}$ (se define como $min$ debido a que como se midió en el cuarto cuadrante la velocidad máxima en magnitud equivale a la velocidad más negativa). En ese punto $(l,b_{min})$ se tiene:
 \begin{gather*}
 R=R_{\odot}sin(l) \ \land \ d=R_{\odot}cos(l),
 \end{gather*}
-por lo que, siguiendo la representación de la Figura (...), se consigue que la altura de dicho punto viene dada por:
+así que la altura de dicho punto con respecto al ecuador galáctico viene dada por:
 \begin{equation*}
 z=d\cdot tan(b_{min})=R_{\odot}cos(l)\cdot tan(b_{min}),
 \end{equation*}
@@ -209,8 +209,27 @@ Esfera + masa puntual & \num{7.981e9}                                        &  
 \label{tab:parametros}
 \end{table}
 
+(\textbf{AGREGAR ERRORES}).
 
 \section{Análisis y Conclusiones}
+El procedimiento y los resultados obtenidos en esta tarea permiten analizar las características de la Vía Láctea en el cuarto cuadrante, pero que se pueden hacer conclusiones similares para el resto de la galaxia.
+
+En la Figura \ref{fig:curva-rotacion} se observa que la velocidad tangencial aumenta monotónicamente con el radio, como una función convexa. Esto se observa de forma más clara en el plot (...) de la Figura \ref{fig:fit-curva-rotacion} que se asemeja más a los datos de la Figura \ref{fig:curva-rotacion} al tener el meno error (...), cuya curva utilizada para el fit tiene como segunda derivada evaluada en los parámetros(\textbf{está en mathematica}):
+\[
+1+1
+\]
+Sin embargo para distancias más grandes al centro galáctico los valores empíricos de la velocidad tiende a un valor constante. Esta forma de la curva de rotación se contradice con la curva esperada considerando la masa observada en la galaxia:\\
+
+\textbf{FIGURA}\\
+
+Una de las hipótesis que se manejan para darle sentido a los datos obtenidos es la presencia de masa invisible en forma de halo en la que está sumergida la galaxia, a este tipo de materia desconocida se le conoce como materia oscura que tiene las mismas propiedades que la materia bariónica, pero que no interacciona con la luz. (\textbf{Buscar más sobre la materia oscura y un valor si es que es posible}).
+
+También resulta interesante el comportamiento de las velocidades, tanto tangencial como angular, para un radio menor a $\sim \ 3.5$ kpc, donde se observa una disminución abrupta de las velocidades para luego aumentar de la misma forma, pero en menor magnitud. Esta forma es difiere de los resultados para radios mayores, donde se sigue la forma de una curva de pendiente aproximadamente constante. Esto se debe a que: El centro galáctico posee una densidad mayor al resto de la galaxia, se producen interacciones como (...) y las órbitas de la materia se dan en distintos planos, lo que genera que las velocidades sean diferentes a las de distancias mayores al centro galáctico, por lo que los modelos propuestos en este informe simplifican mucho el problema (\textbf{REVISAR ESTO ÚLTIMO}).
+
+En la Figura \ref{fig:corrugacion} se observa un resultado esperado según la teoría que estipula que hay variaciones de la altura según la distancia al centro galáctico. Se aprecia que la corrugación sigue una forma similar a una función sinusoidal (\textbf{ver si agregar una interpolacion}), en las que hay materia tanto sobre como bajo el plano ecuatorial de la galaxia, notando que los valores de la altura están en el intervalo $[-0.3,0.3]$ kpc aproximadamente, que equivale a un 7.5\% del radio estudiado, por lo que es factible considerar que la galaxia tiene una forma plana.
+
+En conclusión, es de gran relevancia el análisis e interpretación de las propiedades geométricas de la galaxia, ya que han ayudado a entender la naturaleza de la materia oscura que no ha sido predicha por el Modelo Estándar. Además, el fiteo de una curva a los datos de la velocidad permite: Junto con la corrugación, conocer la forma de la galaxia, que para la Vía Láctea es una forma de disco, y obtener un modelo físico con el que se puede aproximar la masa comprendida dentro de cierto radio, teniendo en consideración que hay diferencias en la mecánica de las partículas en el centro de la galaxia, por lo que se debe definir un modelo diferente para radios pequeños.
+
 
 \section{Anexos}
 El script utilizado para esta tarea se encuentra en \href{https://github.com/Wenupi/Astro_exp}{este repositorio de GitHub}.
@@ -227,14 +246,14 @@ El script utilizado para esta tarea se encuentra en \href{https://github.com/Wen
 \begin{figure}[H]
     \centering
     \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/corrugacion.pdf}
-    \caption{Corrugación de la vía láctea para el cuarto cuadrante, representado como la altura con respecto al ecuador galáctico versus la distancia al centro galáctico.}
+    \caption{Corrugación de la Vía Láctea para el cuarto cuadrante, representado como la altura con respecto al ecuador galáctico versus la distancia al centro galáctico.}
     \label{fig:corrugacion}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/fiteo_rotacion.pdf}
-    \caption{Fiteos de la curva de rotación de la velocidad tangencial para el cuarto cuadrante de la vía láctea, utilizando los 5 modelos descritos en la sección 4.}
+    \caption{Fiteos de la curva de rotación de la velocidad tangencial para el cuarto cuadrante de la Vía Láctea, utilizando los 5 modelos descritos en la sección 4.}
     \label{fig:fit-curva-rotacion}
 \end{figure}
 
