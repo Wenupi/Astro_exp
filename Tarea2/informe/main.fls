@@ -406,8 +406,14 @@ OUTPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/As
 INPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/informe/main.lof
 INPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/informe/main.lof
 OUTPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/informe/main.lof
+INPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/informe/main.lot
+INPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/informe/main.lot
+OUTPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/informe/main.lot
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
+INPUT /Users/javier/Downloads/IMG_1699.pdf
+INPUT /Users/javier/Downloads/IMG_1699.pdf
+INPUT /Users/javier/Downloads/IMG_1699.pdf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr17.tfm
@@ -423,10 +429,10 @@ INPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/Ast
 INPUT /Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/informe/main.aux
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb

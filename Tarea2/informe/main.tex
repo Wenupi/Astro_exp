@@ -83,32 +83,39 @@ Se estudia el cuarto cuadrante
 
 \section{Curva de rotación}
 % https://en.wikipedia.org/wiki/Galaxy_rotation_curve#:~:text=The%20rotation%20curve%20of%20a,distance%20from%20that%20galaxy's%20centre.&text=Stars%20revolve%20around%20their%20galaxy's,a%20large%20range%20of%20distances.
-La velocidad depende de la distancia al centro
 
-Constantes para el Sol de la IAU (no están actualizadas)
-\begin{gather*}
-{v_{\odot}}^{rot}=220 \ km/s\\
-R_{\odot} = 8.5 \ kpc
-\end{gather*}
-En \href{https://www.youtube.com/watch?v=Ijj2VhVSFsg}{la clase} se llega a la \textit{ecuación maestra}, pero para el caso en el que el objeto es tangencial. También se demuestra que $\omega$ disminuye con el radio.
+%La velocidad depende de la distancia al centro
 
-Parece que se ocupa efecto Doppler para medir las velocidades.
+%Constantes para el Sol de la IAU (no están actualizadas)
+%\begin{gather*}
+%{v_{\odot}}^{rot}=220 \ km/s\\
+%R_{\odot} = 8.5 \ kpc
+%\end{gather*}
+%En \href{https://www.youtube.com/watch?v=Ijj2VhVSFsg}{la clase} se llega a la \textit{ecuación maestra}, pero para el caso en el que el objeto es tangencial. También se demuestra que $\omega$ disminuye con el radio.
 
-No es lo mismo el movimiento en el centro galáctico que en el disco, en el disco se asume rotación pura, mientras que en el centro hay varios fenómenos como expansion, colapso, movimiento energetico, explosiones, etc.
+%Parece que se ocupa efecto Doppler para medir las velocidades.
 
-Las velocidades iguales a 0 (en el diagrama longitud-velocidad) es cuando las estrellas están en el círculo solar, por lo que se puede confundir con algo muy lejos.
+%No es lo mismo el movimiento en el centro galáctico que en el disco, en el disco se asume rotación pura, mientras que en el centro hay varios fenómenos como expansion, colapso, movimiento energetico, explosiones, etc.
 
-Parece que las coordenadas están en:
-\begin{gather*}
-300 ^{\circ}<l<348^{\circ}\\
--2^{\circ}<b<2^{\circ}
-\end{gather*}
+%Las velocidades iguales a 0 (en el diagrama longitud-velocidad) es cuando las estrellas están en el círculo solar, por lo que se puede confundir con algo muy lejos.
+
+%Parece que las coordenadas están en:
+%\begin{gather*}
+%300 ^{\circ}<l<348^{\circ}\\
+%-2^{\circ}<b<2^{\circ}
+%\end{gather*}
 
 %======================================================
 
 %Para medir la velocidad de las estrellas en la galaxia se ocupa como trazador del hidrógeno molecular, H\textsubscript{2}, al monóxido de carbono, CO, ya que es la segunda molécula más abundante, tiene un fuerte momento dipolar y sus transiciones son \textit{ubicuas}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=3in]{/Users/javier/Downloads/IMG_1699.pdf}
+    \caption{Cinemática de una partícula orbitando el centro galácitco, cuyo movimiento es observado desde la Tierra.}
+    \label{fig:mecanica}
+\end{figure}
 
-Siguiendo la Figura (...) se tiene que la velocidad de una estrella, en la línea de visión viene dada por:
+Siguiendo la Figura \ref{fig:mecanica} se tiene que la velocidad de una estrella, en la línea de visión viene dada por:
 \begin{equation*}
 v_{\shortparallel}(R)=v(R)cos(\alpha)-v(R_{\odot}sin(l))
 \end{equation*}
@@ -145,7 +152,7 @@ Para realizar esta tarea se ocupó un cubo de datos que contiene: Longitud, lati
 \begin{equation*}
 \omega(R_{\odot}sin(l))=\frac{v_T(l)}{R_{\odot}sin(l)}+\omega_{\odot},
 \end{equation*}
-con $\omega_{\odot}$ la velocidad angular del Sol igual a (...) rads\textsuperscript{-1}. Esta velocidad angular se calcula para cada velocidad tangencial de cada longitud, con lo que se consigue el gráfico de $\omega(R)$ vs $R$, junto con el gráfico de la velocidad tangencial versus el radio, $v_T(R)$ vs $R$, ambos presentes en la Figura \ref{fig:curva-rotacion}.
+con $\omega_{\odot}$ la velocidad angular del Sol igual a 25.882 rads\textsuperscript{-1}. Esta velocidad angular se calcula para cada velocidad tangencial de cada longitud, con lo que se consigue el gráfico de $\omega(R)$ vs $R$, junto con el gráfico de la velocidad tangencial versus el radio, $v_T(R)$ vs $R$, ambos presentes en la Figura \ref{fig:curva-rotacion}.
 
 Después \href{https://www.youtube.com/watch?v=8ISCwe7OM-8}{el profe }habla sobre la \textit{distancia cinemática}.
 
@@ -156,17 +163,18 @@ Esto se debe a que la galaxia tiene una estructura ondulatoria que depende del �
 
 Para medir esta corrugación se utilizaron los mismo datos usados para medir la curva de rotación. Se toma como posición de la densidad máxima para cada longitud, como la posición en la latitud para la cual se consigue la velocidad máxima en magnitud asociada, $v_{T}$, que se llamará $b_{min}$ (se define como $min$ debido a que como se midió en el cuarto cuadrante, la velocidad máxima en magnitud equivale a la velocidad más negativa). En ese punto $(l,b_{min})$ se tiene:
 \begin{gather*}
-R=R_{\odot}sin(l) \ \land \ D=R_{\odot}cos(l),
+R=R_{\odot}sin(l) \ \land \ d=R_{\odot}cos(l),
 \end{gather*}
 por lo que, siguiendo la representación de la Figura (...), se consigue que la altura de dicho punto viene dada por:
 \begin{equation*}
-z=D\cdot tan(b_{min})=R_{\odot}cos(l)\cdot tan(b_{min}),
+z=d\cdot tan(b_{min})=R_{\odot}cos(l)\cdot tan(b_{min}),
 \end{equation*}
 con lo que se puede calcular la altura de las posiciones para cada longitud y graficar la relación con la distancia $R=R_{\odot}sin(l)$, presente en la Figura \ref{fig:corrugacion}.
+
 \section{Ajuste de modelo de masa}
 Para encontrar una expresión analítica para la curva de rotación se debe ocupar un modelo físico definido por la distribución de la masa de la galaxia. Para esto se ocupa la ecuación (\ref{eq:velocidad}),
 \begin{gather*}
-v(R)=\sqrt{G\frac{M(R)}{R}},
+v(R)=\sqrt{G\frac{M(R)}{R}}.
 \end{gather*}
 
 Para este informe se estudiaron 5 modelos de la distribución de masa $M(R)$:
@@ -184,16 +192,35 @@ Para este informe se estudiaron 5 modelos de la distribución de masa $M(R)$:
 \end{itemize}
 \end{itemize}
 
-La distribuciones de masa de los distintos modelos se reemplazaron en la ecuación (...) y se definieron las funciones \texttt{distribucion\_masa} con lo que se realizó un fiteo usando como referencia la curva de rotación obtenida de forma empírica, los fiteos de cada modelo, junto a los valores de los parámetros libres se presentan en los plots de la Figura \ref{fig:fit-curva-rotacion}.
+La distribuciones de masa de los distintos modelos se reemplazaron en la ecuación \ref{eq:velocidad} y en el script de Python se definieron las funciones \texttt{distribucion\_masa} que se utilizaron para realizar un fiteo de la curva de rotación obtenida de forma empírica. Los fiteos de cada modelo se presentan en los plots de la Figura \ref{fig:fit-curva-rotacion}, mientras que los valores de los parámetros de cada modelo, utilizados para el fit se muestran en la siguiente tabla:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\hline
+Modelo                & \begin{tabular}[c]{@{}c@{}}M\textsubscript{0}\\ unidad\end{tabular} & \begin{tabular}[c]{@{}c@{}}S\\ Unidad\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\rho$\\ unidad\end{tabular} \\ \hline
+Masa puntual          & \num{3.228e10}                                      &                                                    &                                                      \\
+Disco uniforme        &                                                     & \num{5.888e8}                                       &                                                      \\
+Esfera uniforme       &                                                     &                                                    & \num{7.964e7}                                         \\
+Disco + masa puntual  & \num{-3.403e8}                                       & \num{5.941e8}                                       &                                                      \\
+Esfera + masa puntual & \num{7.981e9}                                        &                                                    & \num{6.372e7}                                         \\ \hline
+\end{tabular}
+\caption{Parámetros de cada modelo utilizados para el fiteo de la curva de rotación.}
+\label{tab:parametros}
+\end{table}
+
+
 \section{Análisis y Conclusiones}
 
 \section{Anexos}
 El script utilizado para esta tarea se encuentra en \href{https://github.com/Wenupi/Astro_exp}{este repositorio de GitHub}.
 
+
+
 \begin{figure}[H]
     \centering
     \includegraphics{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/curva_rotacion.pdf}
-    \caption{Curvas de rotación para la velocidad tangencial en el gráfico de más arriba y para la velocidad angular en el gráfico de abajo.}
+    \caption{Curvas de rotación para la velocidad tangencial en el gráfico de más arriba y para la velocidad angular en el gráfico de abajo, en función de la distancia al centro galáctico}
     \label{fig:curva-rotacion}
 \end{figure}
 
