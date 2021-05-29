@@ -14,7 +14,7 @@ from astropy import units as u
 from matplotlib.font_manager import FontProperties  # fuente de los gráficos
 import math
 
-G = 4.302e-6  # [km3kg-1s-2] creo
+G = 4.302e-6  
 cubo = fits.open("southgal_fixbadc.fits")  # se abre el cubo de datos
 data = cubo[0].data  # extracción matriz de datos
 header = cubo[0].header  # extracción del header
@@ -37,59 +37,7 @@ def values(h,j):
 velocidad = values(header,1)
 longitud = values(header,2)
 latitud = values(header,3)
-"""
-# Índices de una longitud y latitud específica
-lon_i = np.where(longitud== 325.0)[0][0]
-lat_i = np.where(latitud== -0.25)[0][0]
 
-i_l = -1
-i_b = -1
-i_k = -1
-"""
-#print(lon_i,lat_i)
-"""
-La figura 1 es determinando el ruido "a mano", abajo se hace automatico
-=======================================================================
-"""
-#fig1, ax1 = plt.subplots(3, 1, figsize=(3.5, 9))
-#ax1[0].plot(velocidad, data[lat_i][lon_i][:])
-"""
-ax1[0].set_xlabel('Velocidad')
-ax1[0].set_ylabel('Temperatura', fontsize=18)
-
-#T = data[i_b][i_l][:] #i_b = 14 i_l =200
-T = data[14][200][:]
-ruido = np.where(T<0.5 ) #unidades de K  # otra forma es T>0.5  
-ax1[1].plot(velocidad, T, '.',color='r', label='Signal')
-ax1[1].plot(velocidad[ruido], T[ruido],'.', color='b', label='Noise')
-ax1[1].legend()
-ax1[1].set_xlabel('Velocidad', fontsize=18)
-ax1[1].set_ylabel('Temperatura', fontsize=18)
-ax1[1].set_title('Separando a mano', fontsize=18)
-
-#T = data[i_b][i_l][:]
-ruido = np.where(T<0.5 ) #otra forma es T>0.5
-ax1[2].plot(velocidad, T,color='r', label='Signal')
-ax1[2].plot(velocidad[ruido], T[ruido], color='b', label='Noise')
-ax1[2].legend()
-ax1[2].set_xlabel('Velocidad', fontsize=18)
-ax1[2].set_ylabel('Temperatura', fontsize=18)
-ax1[2].set_title('Separando a mano', fontsize=18)
-fig1.tight_layout()    
-fig1.savefig("espectro_basico")
-"""
-"""
-============================================================
-"""
-"""
-T = data[14][200][:]
-#r = sigma_clip(T, sigma=3)
-r = sigma_clip(T, sigma_lower=3, sigma_upper=3)
-rms = np.sqrt(np.mean(r**2))
-rmask = r.mask
-v_tan = velocidad[rmask][0]
-print ('v_tan con mascara =', v_tan)
-"""
 
 # Se crea una funcion que para una longitud(l) fija, se recorre latitud(b) y se calcula el rms de las
 # velocidades
@@ -147,8 +95,6 @@ for i in range(385):
                      sp.sin(longitud[i]*sp.pi/180.)) +\
                      np.abs((vsol.value)*sp.sin(longitud[i]*sp.pi/180.))
 
-#R = R*3.2408e-14*1e-3
-#R0 = R0*3.2408e-14*1e-3
 
 # %%
 """
@@ -199,10 +145,10 @@ fig4.savefig("img/corrugacion.pdf")
 ======================P3======================
 """
 #G = 4.302e-6
-G_1 = 6.67408*1e-11*u.meter**3*u.kilogram**(-1)*u.second**(-2) # m3 kg-1 s-2
-G_2 = G_1.to(u.parsec**3*u.kilogram**(-1)*u.second**(-2))  # km3 kg-1 s-2
-G = G_2.value
-G = 4.302e-6
+#G_1 = 6.67408*1e-11*u.meter**3*u.kilogram**(-1)*u.second**(-2) # m3 kg-1 s-2
+#G_2 = G_1.to(u.parsec**3*u.kilogram**(-1)*u.second**(-2))  # km3 kg-1 s-2
+#G = G_2.value
+#G = 4.302e-6
 
 t_2 = 3.086*10**(13)  # parsec -> kilometro
 # Funciones de la velocidad tangencial para cada modelo
@@ -322,4 +268,11 @@ ax3[4].text(0.76, 0.3, r'$\rho =$'+str(popt_5[0])+'$M_0=$'+str(popt_5[1]), fonts
 fig3.show()
 #fig3.tight_layout()
 fig3.savefig("img/fiteo_rotacion.pdf")
+
+error_1 = np.mean((distribucion_masa_1(R*t, *popt_1)-vR)**2)
+error_2 = np.mean((distribucion_masa_2(R*t, *popt_2)-vR)**2)
+error_3 = np.mean((distribucion_masa_3(R*t, *popt_3)-vR)**2)
+error_4 = np.mean((distribucion_masa_4(R*t, *popt_4)-vR)**2)
+error_5 = np.mean((distribucion_masa_5(R*t, *popt_5)-vR)**2)
+
 # %%
