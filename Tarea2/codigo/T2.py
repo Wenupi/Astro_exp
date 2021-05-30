@@ -14,7 +14,7 @@ from astropy import units as u
 from matplotlib.font_manager import FontProperties  # fuente de los gráficos
 import math
 
-G = 4.302e-6  
+G = 4.302e-6  # Constante gravitacion de Newton
 cubo = fits.open("southgal_fixbadc.fits")  # se abre el cubo de datos
 data = cubo[0].data  # extracción matriz de datos
 header = cubo[0].header  # extracción del header
@@ -49,7 +49,8 @@ def fmin(l, latitud, vs):
     #recorre latitud
     for q in range(33):
         T1 = data[q][l][:]
-        rms = np.sqrt(np.mean(T1**2))   #calcula rms
+        noise = sigma_clip(T1, sigma=5)  # solo se toma la señal mayor a 5 sigma
+        rms = np.sqrt(np.mean(noise**2))   #calcula rms del ruido
         #recorre velocidad
         for w in range(306):
             if data[q][l][w]>=5*rms:  #buscamos que no sea ruido
@@ -107,17 +108,15 @@ fig2, ax2 = plt.subplots(2, 1, figsize=(5.5, 5), sharex=True)
 fig2.subplots_adjust(hspace=0)
 ax2[0].plot(R*t, vR, 'maroon')
 ax2[0].plot(R*t, vR, 'r.')
-ax2[1].plot(R*t, vR/R+omegasol.value, 'maroon')
-ax2[1].plot(R*t, vR/R+omegasol.value, 'r.')
+ax2[1].plot(R*t, -vmin/R+omegasol.value, 'maroon')
+ax2[1].plot(R*t, -vmin/R+omegasol.value, 'r.')
 ax2[1].grid()
 ax2[0].set_ylim(50, 255)
 ax2[0].set_yticks(np.arange(60, 255, 40))
-#ax2[1].set_yticks(np.arange(60, 130, 40))
 ax2[0].grid()
 ax2[1].set_xlabel("$R$ [kpc]", fontsize=10)
 ax2[0].set_ylabel("$V_{tan}$ [km/s]", fontsize=10)
 ax2[1].set_ylabel(r"$\omega_{tan}$ [rad/s]", fontsize=10)
-#ax2.set_title("Velocidad de rotacion en funcion de R", fontsize=10)
 fig2.show()
 #fig2.tight_layout()    
 fig2.savefig("img/curva_rotacion.pdf")
@@ -144,11 +143,6 @@ fig4.savefig("img/corrugacion.pdf")
 """
 ======================P3======================
 """
-#G = 4.302e-6
-#G_1 = 6.67408*1e-11*u.meter**3*u.kilogram**(-1)*u.second**(-2) # m3 kg-1 s-2
-#G_2 = G_1.to(u.parsec**3*u.kilogram**(-1)*u.second**(-2))  # km3 kg-1 s-2
-#G = G_2.value
-#G = 4.302e-6
 
 t_2 = 3.086*10**(13)  # parsec -> kilometro
 # Funciones de la velocidad tangencial para cada modelo
@@ -193,12 +187,8 @@ ax3[0].text(0.8, 0.15, 'Masa central', fontsize=11,
          fontproperties=font, horizontalalignment='center',
          verticalalignment='center', transform=ax3[0].transAxes,
          bbox=dict(facecolor='white', alpha=1))
-"""
-ax3[0].text(0.9, 0.15, '$M_0$='+str(format(popt_1[0],'.3E')), fontsize=8.7,
-         fontproperties=font, horizontalalignment='center',
-         verticalalignment='center', transform=ax3[0].transAxes,
-         bbox=dict(facecolor='white', alpha=1))
-"""
+
+
 ax3[1].plot(R*t, distribucion_masa_2(R*t, *popt_2))
 ax3[1].plot(R*t, vR, 'maroon')
 ax3[1].plot(R*t, vR, 'r.')
@@ -209,12 +199,8 @@ ax3[1].text(0.8, 0.15, 'Disco uniforme', fontsize=11,
          fontproperties=font, horizontalalignment='center',
          verticalalignment='center', transform=ax3[1].transAxes,
          bbox=dict(facecolor='white', alpha=1))
-"""
-ax3[1].text(0.8, 0.3, 'S='+str(popt_2[0]), fontsize=11,
-         fontproperties=font, horizontalalignment='center',
-         verticalalignment='center', transform=ax3[1].transAxes,
-         bbox=dict(facecolor='white', alpha=1))
-"""
+
+
 ax3[2].plot(R*t, distribucion_masa_3(R*t, *popt_3))
 ax3[2].plot(R*t, vR, 'maroon')
 ax3[2].plot(R*t, vR, 'r.')
@@ -226,12 +212,8 @@ ax3[2].text(0.8, 0.15, 'Esfera uniforme', fontsize=11,
          fontproperties=font, horizontalalignment='center',
          verticalalignment='center', transform=ax3[2].transAxes,
          bbox=dict(facecolor='white', alpha=1))
-"""
-ax3[2].text(0.8, 0.3, r'$\rho=$'+str(popt_3[0]), fontsize=11,
-         fontproperties=font, horizontalalignment='center',
-         verticalalignment='center', transform=ax3[2].transAxes,
-         bbox=dict(facecolor='white', alpha=1))
-"""
+
+
 ax3[3].plot(R*t, distribucion_masa_4(R*t, *popt_4))
 ax3[3].plot(R*t, vR, 'maroon')
 ax3[3].plot(R*t, vR, 'r.')
@@ -242,12 +224,8 @@ ax3[3].text(0.76, 0.15, 'Disco + masa central', fontsize=11,
          fontproperties=font, horizontalalignment='center',
          verticalalignment='center', transform=ax3[3].transAxes,
          bbox=dict(facecolor='white', alpha=1))
-"""
-ax3[3].text(0.76, 0.3, 'S='+str(popt_4[0])+'$M_0=$'+str(popt_4[1]), fontsize=11,
-         fontproperties=font, horizontalalignment='center',
-         verticalalignment='center', transform=ax3[3].transAxes,
-         bbox=dict(facecolor='white', alpha=1))
-"""
+
+
 ax3[4].plot(R*t, distribucion_masa_5(R*t, *popt_5))
 ax3[4].plot(R*t, vR, 'maroon')
 ax3[4].plot(R*t, vR, 'r.')
@@ -259,12 +237,7 @@ ax3[4].text(0.76, 0.15, 'Esfera + masa central', fontsize=11,
          fontproperties=font, horizontalalignment='center',
          verticalalignment='center', transform=ax3[4].transAxes,
          bbox=dict(facecolor='white', alpha=1))
-"""
-ax3[4].text(0.76, 0.3, r'$\rho =$'+str(popt_5[0])+'$M_0=$'+str(popt_5[1]), fontsize=11,
-         fontproperties=font, horizontalalignment='center',
-         verticalalignment='center', transform=ax3[4].transAxes,
-         bbox=dict(facecolor='white', alpha=1))
-"""
+
 fig3.show()
 #fig3.tight_layout()
 fig3.savefig("img/fiteo_rotacion.pdf")

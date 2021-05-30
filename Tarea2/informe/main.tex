@@ -79,12 +79,19 @@
 
 %\input{example} % Ejemplo, se puede borrar
 \section{Introducción}
-La materia en la galaxia en la que está ubicado el sistema solar, la Vía Láctea, se concentra en lo que se conoce como plano galáctico, que consiste en un plano perpendicular a los polos de la galaxia.  Debido a que este plano es delgado en comparación a su área, hace que la galaxia tenga una forma achatada de disco en el que la materia se mueve describiendo trayectorias circulares, elípticas, hiperbólicas y parabólicas.
+La materia en la galaxia en la que está ubicado el sistema solar, la Vía Láctea, se concentra en lo que se conoce como plano galáctico, que consiste en un plano perpendicular a los polos de la galaxia.  Debido a que este plano es delgado en comparación a su área, hace que la galaxia tenga una forma achatada de disco en el que la materia se mueve describiendo trayectorias circulares, elípticas, hiperbólicas y parabólicas. Con el fin de poder modelar estos movimientos se asume que las órbitas de la materia, con una densidad uniforme en toda la galaxia, son circulares alrededor del centro de la galaxia.
+
 Desde la perspectiva del sistema solar, este plano se puede dividir en 4 secciones utilizando coordenadas galácticas que se constituyen por: Latitud galáctica ($b$), ángulo en grados medido desde el plano ecuatorial, o medio plano, hasta la altura de un punto; longitud galáctica ($l$), ángulo  en grados medido desde el centro galáctico hasta un punto a través del plano galáctico. Estas secciones se conocen como cuadrantes y se denotan por números romanos.
 
-Para el presente informe se utilizó un cubo de datos, que consiste en una arreglo multidimensional de valores y que se utiliza ampliamente en la astronomía, definido según las coordenadas galácticas y un arreglo de velocidades para cada punto observado, obtenidas considerando el efecto Doppler producido por el movimiento de la materia en la galaxia para el cuarto cuadrante que está definido en las longitudes $[ 0^{\circ}, 270^{\circ}]$ y en el que está contenido tanto parte de la zona dentro de la órbita que describe el sistema solar alrededor del centro galáctico, conocida como círculo solar, como fuera de esta.
+Para el presente informe se utilizó un cubo de datos, que consiste en una arreglo multidimensional de valores y que se utiliza ampliamente en la astronomía, definido según las coordenadas galácticas y un arreglo de velocidades para cada punto observado, obtenidas considerando el efecto Doppler producido por el movimiento de la materia en la galaxia, utilizando:
+\[
+\nu_{observed}=(1-\frac{\Delta v}{c})\cdot \nu_0,
+\]
+donde $\nu_{observed}$ es la frecuencia observada, $\nu_0$ la frecuencia emitida por la materia debido a procesos radiativos, $\Delta v$ la velocidad relativa entre el observador y la materia y $c$ la velocidad de la luz.
 
-Con el fin de poder descomponer las velocidades según distintos ejes, se define el LSR (\textit{Local Standar of Rest}) que consiste en la velocidad de una partícula imaginaria que se mueve a través del plano galáctico de la Vía Láctea en la órbita circular más cercana que pasa por la posición del Sol. Además, debido a que la velocidad de la materia en distintos puntos de la galaxia, no se descompone únicamente en la línea de observación (LSO) en la que se mide, es que hay un rango de velocidades en magnitud que van desde 0, cuando la velocidad del objeto es perpendicular a la línea de visión, hasta la velocidad terminal que consiste en la máxima velocidad medible para dicho objeto. Esta es la velocidad que mantiene aproximadamente en una órbita circular.
+Se realizaron las mediciones específicamente para el cuarto cuadrante que está definido en las longitudes $[ 0^{\circ}, 270^{\circ}]$ y en el que está contenido tanto parte de la zona dentro de la órbita que describe el sistema solar alrededor del centro galáctico, conocida como círculo solar, como fuera de esta.
+
+Con el objetivo de poder descomponer las velocidades según distintos ejes, se define el LSR (\textit{Local Standar of Rest}) que consiste en la velocidad de una partícula imaginaria que se mueve a través del plano galáctico de la Vía Láctea en la órbita circular más cercana que pasa por la posición del Sol, denotada como $v_{LSR}$, y la mayor de estas velocidades como $v_{LSR}^{max}$. Además, debido a que la velocidad de la materia en distintos puntos de la galaxia, no se descompone únicamente en la línea de observación (LSO) en la que se mide, es que hay un rango de velocidades en magnitud que van desde 0, cuando la velocidad del objeto es perpendicular a la línea de visión, hasta la velocidad terminal que consiste en la máxima velocidad medible para dicho objeto.
 
 \section{Curva de rotación}
 % https://en.wikipedia.org/wiki/Galaxy_rotation_curve#:~:text=The%20rotation%20curve%20of%20a,distance%20from%20that%20galaxy's%20centre.&text=Stars%20revolve%20around%20their%20galaxy's,a%20large%20range%20of%20distances.
@@ -157,7 +164,7 @@ Para realizar esta tarea se ocupó un cubo de datos que contiene: Longitud, lati
 \begin{equation*}
 \omega(R_{\odot}sin(l))=\frac{v_T(l)}{R_{\odot}sin(l)}+\omega_{\odot},
 \end{equation*}
-con $\omega_{\odot}$ la velocidad angular del Sol igual a 25.882 \si{\radian\per\second}. Esta velocidad angular se calcula para cada velocidad tangencial de cada longitud, con lo que se consigue el gráfico de $\omega(R)$ vs $R$, junto con el gráfico $v_T(R)$ vs $R$, ambos presentes en la Figura \ref{fig:curva-rotacion}.
+con $\omega_{\odot}$ la velocidad angular del Sol igual a 25.882 \si{\radian\per\second}. Esta velocidad angular se calcula para cada longitud, con lo que se consigue el gráfico de $\omega(R)$ vs $R$, junto con el gráfico $v_T(R)$ vs $R$, ambos presentes en la Figura \ref{fig:curva-rotacion}.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.88]{/Users/javier/Documents/University/5th_semester/Experimental_astronomy/Astro_exp/Tarea2/codigo/img/curva_rotacion.pdf}
@@ -216,27 +223,23 @@ La distribuciones de masa de los distintos modelos se reemplazaron en la ecuaci�
 \begin{tabular}{ccccc}
 \hline
 Modelo                & \begin{tabular}[c]{@{}c@{}}M\textsubscript{0}\\ M\textsubscript{$\odot$}\end{tabular} & \begin{tabular}[c]{@{}c@{}}S\\ M\textsubscript{$\odot$} kpc\textsuperscript{-2}\end{tabular} & \begin{tabular}[c]{@{}c@{}}$\rho$\\ M\textsubscript{$\odot$} kpc\textsuperscript{-3}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Error cuadrático\\ medio\end{tabular} \\ \hline
-Masa puntual          & \num{3.228e10}                                      &                           -                         &                              -                        &                                                                 5550.978 \\
-Disco uniforme        &                                   -                  & \num{5.888e8}                                       &                            -                          &                                                                 218.554 \\
-Esfera uniforme       &                             -                        &                                                    & \num{7.964e7}                                         &                                                                 1172.983 \\
-Disco + masa puntual  & \num{7.643e-8}                                        & \num{5.888e8}                                      &                         -                             &                                                                 218.554 \\
-Esfera + masa puntual & \num{7.981e9}                                        &                             -                       & \num{6.372e7}                                         &                                                                 475.509 \\ \hline
+Masa puntual          & \num{3.793e10}                                      &                           -                         &                              -                        &                                                                 4503.590 \\
+Disco uniforme        &                                   -                  & \num{6.595e8}                                       &                            -                          &                                                                 350.900 \\
+Esfera uniforme       &                             -                        &                                                    & \num{8.770e7}                                         &                                                                 2134.510 \\
+Disco + masa puntual  & \num{5.321e9}                                        & \num{5.779e8}                                      &                         -                             &                                                                 214.551 \\
+Esfera + masa puntual & \num{1.408e10}                                        &                             -                       & \num{6.055e7}                                         &                                                                 451.711 \\ \hline
 \end{tabular}
 \caption{Parámetros de cada modelo utilizados para el fiteo de la curva de rotación, junto con el error cuadrático medio asociado a cada modelo.}
 \label{tab:parametros}
 \end{table}
-
+\newpage
 
 \section{Análisis y Conclusiones}
 El procedimiento y los resultados obtenidos en esta tarea permiten analizar las características de la Vía Láctea en el cuarto cuadrante, pero se pueden hacer conclusiones similares para el resto de la galaxia.
 
-En la Figura \ref{fig:curva-rotacion} se observa que la velocidad tangencial aumenta monotónicamente con el radio, como una función convexa. Esto se observa de forma más clara en los plots 2 y 3 de la Figura \ref{fig:fit-curva-rotacion} cuyas curvas son las que más se asemejan a los datos de la Figura \ref{fig:curva-rotacion} al tener el menor error cuadrático medio de 28.554, donde las curvas utilizadas para el fit tiene como primera y segunda derivada evaluada en los parámetros, los valores:
-\[
- \frac{dv(R)}{dR} \approx \frac{21504.5\cdot G}{\sqrt{G R}} \ ; \  \frac{d^2v(R)}{dR^2} \approx -\frac{10752.2\cdot G^2}{(G R)^{3/2}},
-\]
-donde la primera derivada es positiva y la segunda derivada negativa para todo valor del radio, por lo tanto demuestra que la curva que mejor se aproxima a los datos obtenidos tiene una forma convexa y es siempre creciente.
+En la Figura \ref{fig:curva-rotacion} se observa que la velocidad tangencial aumenta monotónicamente con el radio, como una función convexa. Esto se observa de forma más clara en el cuarto plot de la Figura \ref{fig:fit-curva-rotacion} cuya curva es la que más se asemeja a los datos de la Figura \ref{fig:curva-rotacion} al tener el menor error cuadrático medio de 214.551.
 
-Sin embargo para distancias más grandes al centro galáctico los valores empíricos de la velocidad tiende a un valor constante. Esta forma de la curva de rotación se contradice con la curva esperada considerando la masa observada en la galaxia:
+Sin embargo para distancias más grandes al centro galáctico los valores empíricos de la velocidad tiende a un valor constante. Esta forma de la curva de rotación se contradice con la curva esperada considerando la masa observada en la galaxia, o sea, masa que emite luz:
 
 \begin{figure}[H]
     \centering
@@ -245,13 +248,17 @@ Sin embargo para distancias más grandes al centro galáctico los valores empír
     \label{fig:contradiction}
 \end{figure}
 
-Una de las hipótesis que se manejan para darle sentido a los datos obtenidos es la presencia de masa invisible en forma de halo en la que está sumergida la galaxia, a este tipo de materia desconocida se le conoce como materia oscura que tiene las mismas propiedades que la materia bariónica, pero que no interacciona con la luz.
+Una de las hipótesis que se manejan para darle sentido a los datos obtenidos es la presencia de masa invisible en forma de halo en la que está sumergida la galaxia, a este tipo de materia desconocida se le conoce como materia oscura que tiene las mismas propiedades que la materia bariónica, pero que no interacciona con la luz, por lo que esta materia se le agrega a la materia observada y, de esta forma, se puede compensar con el aumento del radio y producir una curva aproximadamente constante a cierta distancia.
 
-También resulta interesante el comportamiento de las velocidades, tanto tangencial como angular, para un radio menor a $\sim \ 3.5$ kpc, donde se observa una disminución abrupta de las velocidades para luego aumentar de la misma forma, pero en menor magnitud. Esta forma es difiere de los resultados para radios mayores, donde se sigue la forma de una curva de pendiente aproximadamente constante. Esto se debe a que: El centro galáctico posee una densidad mayor al resto de la galaxia, se producen fenómenos como expansión, colapso, movimiento energético, explosiones, etc, y las órbitas de la materia se dan en distintos planos, lo que genera que las velocidades sean diferentes a las de distancias mayores al centro galáctico.
 
-En la Figura \ref{fig:corrugacion} se observa un resultado esperado según la teoría que estipula que hay variaciones de la altura según la distancia al centro galáctico. Se aprecia que la corrugación sigue una forma similar a una función sinusoidal, en las que hay materia tanto sobre como bajo el plano ecuatorial de la galaxia, notando que los valores de la altura están en el intervalo $[-0.3,0.3]$ kpc aproximadamente, que equivale a un 7.5\% del radio estudiado y un 1\% del diámetro total de la Vía Láctea, por lo que es factible considerar que la galaxia tiene una forma plana.
+También resulta interesante el comportamiento de las velocidades tanto tangencial como angular de la Figura \ref{fig:curva-rotacion}, ya que para ambas a radios menores a $\sim 4$ kpc pareciese que las velocidades tomasen uno de dos valores que difieren en magnitud, pero siguen el mismo comportamiento hasta los 4 kpc, donde las velocidades pasan a tener aproximadamente el mismo valor para una diferencia pequeña del radio. Esto se puede deber a que: El centro galáctico posee una densidad mayor al resto de la galaxia, se producen fenómenos como expansión, colapso, movimiento energético, explosiones, etc, y las órbitas de la materia se dan en distintos planos, lo que genera que las velocidades puedan variar significativamente para radios cercanos.
 
-En conclusión, es de gran relevancia el análisis e interpretación de las propiedades geométricas de la galaxia, ya que han ayudado a entender la naturaleza de la materia oscura que no ha sido predicha por el Modelo Estándar. Además, el fiteo de una curva a los datos de la velocidad permite: Junto con la corrugación, conocer la forma de la galaxia, que para la Vía Láctea es una forma de disco, y obtener un modelo físico con el que se puede aproximar la masa comprendida dentro de cierto radio, teniendo en consideración que hay diferencias en la mecánica de las partículas en el centro de la galaxia, por lo que se debe definir un modelo diferente para radios pequeños.
+
+%También resulta interesante el comportamiento de las velocidades, tanto tangencial como angular, para un radio menor a $\sim \ 3.5$ kpc, donde se observa una disminución abrupta de las velocidades para luego aumentar de la misma forma, pero en menor magnitud. Esta forma es difiere de los resultados para radios mayores, donde se sigue la forma de una curva de pendiente aproximadamente constante. Esto se debe a que: El centro galáctico posee una densidad mayor al resto de la galaxia, se producen fenómenos como expansión, colapso, movimiento energético, explosiones, etc, y las órbitas de la materia se dan en distintos planos, lo que genera que las velocidades sean diferentes a las de distancias mayores al centro galáctico.
+
+En la Figura \ref{fig:corrugacion} se observa un resultado esperado según la teoría que estipula que hay variaciones de la altura según la distancia al centro galáctico. Se aprecia que la corrugación sigue una forma similar a una función sinusoidal, en las que hay materia tanto sobre como bajo el plano ecuatorial de la galaxia, notando que los valores de la altura están en el intervalo $[-0.25,0.25]$ kpc aproximadamente, que equivale a un 7.5\% del radio estudiado y un 1\% del diámetro total de la Vía Láctea, por lo que es factible considerar que la galaxia tiene una forma plana.
+
+En conclusión, es de gran relevancia el análisis e interpretación de las propiedades geométricas de la galaxia, ya que han ayudado a entender la naturaleza de la materia oscura que no ha sido predicha por el Modelo Estándar. Además, el fiteo de una curva a los datos de la velocidad permite, junto con la corrugación, conocer la forma de la galaxia, que para la Vía Láctea es una forma de disco, y obtener un modelo físico con el que se puede aproximar la masa comprendida dentro de cierto radio, teniendo en consideración que hay diferencias en la mecánica de las partículas en el centro de la galaxia, por lo que se debe definir un modelo diferente para radios pequeños.
 
 \newpage
 \section{Anexos}
