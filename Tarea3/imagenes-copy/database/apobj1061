@@ -1,0 +1,30 @@
+# Mon 05:11:04 21-Jun-2021
+begin	aperture obj1061 1 588. 132.7376
+	image	obj1061
+	aperture	1
+	beam	1
+	center	588. 132.7376
+	low	-587. -5.
+	high	588. 5.
+	background
+		xmin -15.
+		xmax 15.
+		function chebyshev
+		order 2
+		sample -15:-10,10:15
+		naverage -3
+		niterate 10
+		low_reject 3.
+		high_reject 3.
+		grow 0.
+	axis	2
+	curve	8
+		2.
+		4.
+		8.
+		1168.
+		0.01182814
+		-4.191392
+		0.02158116
+		0.001879961
+

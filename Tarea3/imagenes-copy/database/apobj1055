@@ -1,0 +1,30 @@
+# Mon 04:40:05 21-Jun-2021
+begin	aperture obj1055 1 588. 132.3849
+	image	obj1055
+	aperture	1
+	beam	1
+	center	588. 132.3849
+	low	-587. -5.
+	high	588. 5.
+	background
+		xmin -15.
+		xmax 15.
+		function chebyshev
+		order 2
+		sample -15:-10,10:15
+		naverage -3
+		niterate 10
+		low_reject 3.
+		high_reject 3.
+		grow 0.
+	axis	2
+	curve	8
+		2.
+		4.
+		8.
+		1168.
+		-0.01545739
+		-4.097301
+		0.01295118
+		0.007453552
+

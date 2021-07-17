@@ -79,19 +79,15 @@
 
 %\input{example} % Ejemplo, se puede borrar
 \section{Introducción}
-La materia en la galaxia en la que está ubicado el sistema solar, la Vía Láctea, se concentra en lo que se conoce como plano galáctico, que consiste en un plano perpendicular a los polos de la galaxia.  Debido a que este plano es delgado en comparación a su área, hace que la galaxia tenga una forma achatada de disco en el que la materia se mueve describiendo trayectorias circulares, elípticas, hiperbólicas y parabólicas. Con el fin de poder modelar estos movimientos se asume que las órbitas de la materia, con una densidad uniforme en toda la galaxia, son circulares alrededor del centro de la galaxia.
 
-Desde la perspectiva del sistema solar, este plano se puede dividir en 4 secciones utilizando coordenadas galácticas que se constituyen por: Latitud galáctica ($b$), ángulo en grados medido desde el plano ecuatorial, o medio plano, hasta la altura de un punto; longitud galáctica ($l$), ángulo  en grados medido desde el centro galáctico hasta un punto a través del plano galáctico. Estas secciones se conocen como cuadrantes y se denotan por números romanos.
-
-Para el presente informe se utilizó un cubo de datos, que consiste en una arreglo multidimensional de valores y que se utiliza ampliamente en la astronomía, definido según las coordenadas galácticas y un arreglo de velocidades para cada punto observado, obtenidas considerando el efecto Doppler producido por el movimiento de la materia en la galaxia, utilizando:
 \[
 \nu_{observed}=(1-\frac{\Delta v}{c})\cdot \nu_0,
 \]
-donde $\nu_{observed}$ es la frecuencia observada, $\nu_0$ la frecuencia emitida por la materia debido a procesos radiativos, $\Delta v$ la velocidad relativa entre el observador y la materia y $c$ la velocidad de la luz.
+donde $\nu_{observed}$ es la frecuencia observada, $\nu_0$ la frecuencia emitida por la materia debido a procesos radiativos (en este caso se utilizó CO debido a su abundancia en el universo), $\Delta v$ la velocidad relativa entre el observador y la materia y $c$ la velocidad de la luz.
 
 Se realizaron las mediciones específicamente para el cuarto cuadrante que está definido en las longitudes $[ 0^{\circ}, 270^{\circ}]$ y en el que está contenido tanto parte de la zona dentro de la órbita que describe el sistema solar alrededor del centro galáctico, conocida como círculo solar, como fuera de esta.
 
-Con el objetivo de poder descomponer las velocidades según distintos ejes, se define el LSR (\textit{Local Standar of Rest}) que consiste en la velocidad de una partícula imaginaria que se mueve a través del plano galáctico de la Vía Láctea en la órbita circular más cercana que pasa por la posición del Sol, denotada como $v_{LSR}$, y la mayor de estas velocidades como $v_{LSR}^{max}$. Además, debido a que la velocidad de la materia en distintos puntos de la galaxia, no se descompone únicamente en la línea de observación (LSO) en la que se mide, es que hay un rango de velocidades en magnitud que van desde 0, cuando la velocidad del objeto es perpendicular a la línea de visión, hasta la velocidad terminal que consiste en la máxima velocidad medible para dicho objeto.
+Con el objetivo de poder descomponer las velocidades según distintos ejes, se define el LSR (\textit{Local Standard of Rest}) que consiste en la velocidad de una partícula imaginaria que se mueve a través del plano galáctico de la Vía Láctea en la órbita circular más cercana que pasa por la posición del Sol, denotada como $v_{LSR}$, y la mayor de estas velocidades como $v_{LSR}^{max}$. Además, debido a que la velocidad de la materia en distintos puntos de la galaxia, no se descompone únicamente en la línea de observación (LSO) en la que se mide, es que hay un rango de velocidades en magnitud que van desde 0, cuando la velocidad del objeto es perpendicular a la línea de visión, hasta la velocidad terminal que consiste en la máxima velocidad medible para dicho objeto.
 
 \section{Curva de rotación}
 % https://en.wikipedia.org/wiki/Galaxy_rotation_curve#:~:text=The%20rotation%20curve%20of%20a,distance%20from%20that%20galaxy's%20centre.&text=Stars%20revolve%20around%20their%20galaxy's,a%20large%20range%20of%20distances.
@@ -216,7 +212,7 @@ Para este informe se estudiaron 5 modelos de la distribución de masa $M(R)$:
 \end{itemize}
 \end{itemize}
 
-La distribuciones de masa de los distintos modelos se reemplazaron en la ecuación \ref{eq:velocidad} y en el script de Python se definieron las funciones \texttt{distribucion\_masa} que se utilizaron para realizar un fiteo de la curva de rotación obtenida de forma empírica. Los fiteos de cada modelo se presentan en los plots de la Figura \ref{fig:fit-curva-rotacion}, mientras que los valores de los parámetros de cada modelo, utilizados para el fit se muestran en la siguiente tabla:
+La distribuciones de masa de los distintos modelos se reemplazaron en la ecuación \ref{eq:velocidad} y en el script de Python se definieron las funciones \texttt{distribucion\_masa} que se utilizaron para realizar un fiteo de la curva de rotación obtenida de forma empírica, para esto se ocupó la función de Scipy \texttt{curve\_fit} que recibe como input la función que define al modelo, las condiciones, que en este caso fue que los parámetros fuese positivos o igual a 0, y los datos reales, y como output otorga los valores de los parámetros que permiten que la función ingresada se asemeje lo más posible a los datos obtenidos. Los fiteos de cada modelo se presentan en los plots de la Figura \ref{fig:fit-curva-rotacion}, mientras que los valores de los parámetros de cada modelo, utilizados para el fit se muestran en la siguiente tabla:
 
 \begin{table}[H]
 \centering
